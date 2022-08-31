@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:personal_portfolio/authentications/login_screen.dart';
+import 'package:personal_portfolio/tutee/ProfessorsScreens/prof_dashboard_screen.dart';
+import 'package:personal_portfolio/tutee/home_screen.dart';
+import 'package:personal_portfolio/tuteeallpages/tutee_home_screen.dart';
 
 
 void main() {
@@ -15,8 +18,9 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Tutor & Tutee',
-      home: LoginScreen(),
+      home: HomeScreen(),
     );
   }
 }
+
 
