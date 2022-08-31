@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:personal_portfolio/authentications/login_screen.dart';
 import 'package:personal_portfolio/widgets/mywidets.dart';
 
@@ -31,11 +32,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: SafeArea(
           child: ListView(
         children: [
-          // Container(
-          //   child: Image.asset("assets/images/ttt.png", height: 200,),
-          // ),
           const SizedBox(
-            height: 30,
+            height: 10,
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -237,9 +235,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-          const SizedBox(
-            height: 10.0,
-          ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
@@ -263,15 +258,53 @@ class _RegisterScreenState extends State<RegisterScreen> {
           const SizedBox(
             height: 10.0,
           ),
+          Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    height: 30,
+                    width: 170,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        color: Colors.deepPurple.shade500,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: const Padding(
+                        padding: EdgeInsets.only(left: 9.0),
+                        child: Text(
+                          "A D D  L O C A T I O N",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white70,
+                              fontWeight: FontWeight.bold),
+                        )),
+                  )
+                ],
+              )),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
             child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.0),
                   color: buttonColor,
                 ),
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.leftToRight,
+                          alignment: Alignment.center,
+                          duration: const Duration(milliseconds: 500),
+                          child: const LoginScreen(),
+                          inheritTheme: true,
+                          ctx: context),
+                    );
+                  },
                   child: const Text(
                     "R E G I S T E R",
                     style: TextStyle(
@@ -279,12 +312,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 )),
           ),
-          const SizedBox(height: 15.0,),
+          // const SizedBox(
+          //   height: 8.0,
+          // ),
           Container(
               alignment: Alignment.bottomCenter,
               child: GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (ctx) => const LoginScreen()));
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        alignment: Alignment.center,
+                        duration: const Duration(milliseconds: 500),
+                        child: const LoginScreen(),
+                        inheritTheme: true,
+                        ctx: context),
+                  );
                 },
                 child: RichText(
                   text: TextSpan(children: [
@@ -303,6 +347,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ]),
                 ),
               )),
+          const SizedBox(height: 10.0,)
         ],
       )),
     );

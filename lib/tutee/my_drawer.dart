@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:personal_portfolio/authentications/login_screen.dart';
 import 'package:personal_portfolio/widgets/mywidets.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -32,10 +34,24 @@ class _MyDrawerState extends State<MyDrawer> {
             title: Text("SETTINGS", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),),
           ),
           const SizedBox(height: 220),
-          const ListTile(
-              leading: Icon(Icons.logout, color: Colors.white,),
-              title: Text("LOGOUT", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),),
-            ),
+          GestureDetector(
+            onTap: (){
+              Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.leftToRight,
+                    alignment: Alignment.center,
+                    duration: const Duration(milliseconds: 500),
+                    child: const LoginScreen(),
+                    inheritTheme: true,
+                    ctx: context),
+              );
+            },
+            child: const ListTile(
+                leading: Icon(Icons.logout, color: Colors.white,),
+                title: Text("LOGOUT", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),),
+              ),
+          ),
         ],
       ),
     );

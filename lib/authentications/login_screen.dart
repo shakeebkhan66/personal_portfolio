@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:personal_portfolio/authentications/register_screen.dart';
 import 'package:personal_portfolio/tutee/home_screen.dart';
 import 'package:personal_portfolio/widgets/mywidets.dart';
@@ -87,8 +88,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: MaterialButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (ctx) => HomeScreen()));
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.leftToRight,
+                          alignment: Alignment.center,
+                          duration: const Duration(milliseconds: 500),
+                          child: const HomeScreen(),
+                          inheritTheme: true,
+                          ctx: context),
+                    );
                   },
                   child: const Text(
                     "L O G I N",

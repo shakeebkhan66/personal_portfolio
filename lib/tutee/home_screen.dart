@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:personal_portfolio/tutee/Professors/accounting_professors.dart';
+import 'package:personal_portfolio/tutee/Professors/biology_professors_screen.dart';
+import 'package:personal_portfolio/tutee/Professors/chemistry_professors_screen.dart';
+import 'package:personal_portfolio/tutee/Professors/computer_professors_screen.dart';
+import 'package:personal_portfolio/tutee/Professors/english_professors.dart';
+import 'package:personal_portfolio/tutee/Professors/flutter_professors_screen.dart';
+import 'package:personal_portfolio/tutee/Professors/graphic_design_prof_screen.dart';
+import 'package:personal_portfolio/tutee/Professors/maths_professors_screen.dart';
+import 'package:personal_portfolio/tutee/Professors/physics_professors_screen.dart';
+import 'package:personal_portfolio/tutee/Professors/stats_professors.dart';
 import 'package:personal_portfolio/tutee/my_drawer.dart';
 import 'package:personal_portfolio/tutee/tutor_profile_screen.dart';
 
 import '../widgets/mywidets.dart';
+import 'Professors/python_professors_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -103,265 +115,419 @@ class _SubjectsTabState extends State<SubjectsTab> {
         margin: const EdgeInsets.symmetric(horizontal: 5.0),
         child: Row(
           children: [
-            Container(
-              width: 90,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white38,
-                      offset: Offset(0.1, 0),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: const Text(
-                "Computer",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      alignment: Alignment.center,
+                      duration: const Duration(milliseconds: 500),
+                      child: const ComputerTutors(),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: Container(
+                width: 90,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade400,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.white38,
+                        offset: Offset(0.1, 0),
+                        blurRadius: 5,
+                      )
+                    ]),
+                child: const Text(
+                  "Computer",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
             const SizedBox(
               width: 8.0,
             ),
-            Container(
-              width: 90,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white38,
-                      offset: Offset(0.1, 0),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: const Text(
-                "Mathematics",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      alignment: Alignment.center,
+                      duration: const Duration(milliseconds: 500),
+                      child: const MathsTutors(),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: Container(
+                width: 90,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade400,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.white38,
+                        offset: Offset(0.1, 0),
+                        blurRadius: 5,
+                      )
+                    ]),
+                child: const Text(
+                  "Mathematics",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
             const SizedBox(
               width: 8.0,
             ),
-            Container(
-              width: 90,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white38,
-                      offset: Offset(0.1, 0),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: const Text(
-                "Physics",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      alignment: Alignment.center,
+                      duration: const Duration(milliseconds: 500),
+                      child: const PhysicsTutors(),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: Container(
+                width: 90,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade400,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.white38,
+                        offset: Offset(0.1, 0),
+                        blurRadius: 5,
+                      )
+                    ]),
+                child: const Text(
+                  "Physics",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
             const SizedBox(
               width: 8.0,
             ),
-            Container(
-              width: 90,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white38,
-                      offset: Offset(0.1, 0),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: const Text(
-                "Chemistry",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      alignment: Alignment.center,
+                      duration: const Duration(milliseconds: 500),
+                      child: const ChemistryTutors(),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: Container(
+                width: 90,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade400,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.white38,
+                        offset: Offset(0.1, 0),
+                        blurRadius: 5,
+                      )
+                    ]),
+                child: const Text(
+                  "Chemistry",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
             const SizedBox(
               width: 8.0,
             ),
-            Container(
-              width: 90,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white38,
-                      offset: Offset(0.1, 0),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: const Text(
-                "Biology",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      alignment: Alignment.center,
+                      duration: const Duration(milliseconds: 500),
+                      child: const BiologyTutors(),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: Container(
+                width: 90,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade400,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.white38,
+                        offset: Offset(0.1, 0),
+                        blurRadius: 5,
+                      )
+                    ]),
+                child: const Text(
+                  "Biology",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
             const SizedBox(
               width: 8.0,
             ),
-            Container(
-              width: 90,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white38,
-                      offset: Offset(0.1, 0),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: const Text(
-                "English",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      alignment: Alignment.center,
+                      duration: const Duration(milliseconds: 500),
+                      child: const EnglishTutors(),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: Container(
+                width: 90,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade400,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.white38,
+                        offset: Offset(0.1, 0),
+                        blurRadius: 5,
+                      )
+                    ]),
+                child: const Text(
+                  "English",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
             const SizedBox(
               width: 8.0,
             ),
-            Container(
-              width: 90,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white38,
-                      offset: Offset(0.1, 0),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: const Text(
-                "Statistics",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      alignment: Alignment.center,
+                      duration: const Duration(milliseconds: 500),
+                      child: const StatisticsTutors(),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: Container(
+                width: 90,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade400,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.white38,
+                        offset: Offset(0.1, 0),
+                        blurRadius: 5,
+                      )
+                    ]),
+                child: const Text(
+                  "Statistics",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
             const SizedBox(
               width: 8.0,
             ),
-            Container(
-              width: 90,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white38,
-                      offset: Offset(0.1, 0),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: const Text(
-                "Accounting",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      alignment: Alignment.center,
+                      duration: const Duration(milliseconds: 500),
+                      child: const AccountingTutors(),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: Container(
+                width: 90,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade400,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.white38,
+                        offset: Offset(0.1, 0),
+                        blurRadius: 5,
+                      )
+                    ]),
+                child: const Text(
+                  "Accounting",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
             const SizedBox(
               width: 8.0,
             ),
-            Container(
-              width: 90,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white38,
-                      offset: Offset(0.1, 0),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: const Text(
-                "Graphic Designing",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      alignment: Alignment.center,
+                      duration: const Duration(milliseconds: 500),
+                      child: const GraphicDesigningTutors(),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: Container(
+                width: 90,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade400,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.white38,
+                        offset: Offset(0.1, 0),
+                        blurRadius: 5,
+                      )
+                    ]),
+                child: const Text(
+                  "Graphic Designing",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
             const SizedBox(
               width: 8.0,
             ),
-            Container(
-              width: 90,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white38,
-                      offset: Offset(0.1, 0),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: const Text(
-                "Flutter Development",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      alignment: Alignment.center,
+                      duration: const Duration(milliseconds: 500),
+                      child: const FlutterTutors(),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: Container(
+                width: 90,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade400,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.white38,
+                        offset: Offset(0.1, 0),
+                        blurRadius: 5,
+                      )
+                    ]),
+                child: const Text(
+                  "Flutter Development",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
             const SizedBox(
               width: 8.0,
             ),
-            Container(
-              width: 90,
-              height: 45,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade400,
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.white38,
-                      offset: Offset(0.1, 0),
-                      blurRadius: 5,
-                    )
-                  ]),
-              child: const Text(
-                "Python",
-                textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            GestureDetector(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      alignment: Alignment.center,
+                      duration: const Duration(milliseconds: 500),
+                      child: const PythonTutors(),
+                      inheritTheme: true,
+                      ctx: context),
+                );
+              },
+              child: Container(
+                width: 90,
+                height: 45,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple.shade400,
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Colors.white38,
+                        offset: Offset(0.1, 0),
+                        blurRadius: 5,
+                      )
+                    ]),
+                child: const Text(
+                  "Python",
+                  textAlign: TextAlign.center,
+                  style:
+                      TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                ),
               ),
             ),
           ],
@@ -388,7 +554,16 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
         const SizedBox(height: 15.0,),
         GestureDetector(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (ctx) => TutorProfileScreen()));
+            Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.leftToRight,
+                  alignment: Alignment.center,
+                  duration: const Duration(milliseconds: 500),
+                  child: const TutorProfileScreen(),
+                  inheritTheme: true,
+                  ctx: context),
+            );
           },
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: 7.0),
