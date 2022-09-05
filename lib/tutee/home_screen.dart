@@ -5,7 +5,6 @@ import 'package:personal_portfolio/tuteeallpages/tutee_home_screen.dart';
 import 'package:personal_portfolio/tuteeallpages/tutee_setting_screen.dart';
 import 'package:personal_portfolio/widgets/mywidets.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -14,7 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   int _selectedIndex = 0;
 
   List pages = [
@@ -46,28 +44,16 @@ class _HomeScreenState extends State<HomeScreen> {
             gap: 8.0,
             padding: const EdgeInsets.all(14),
             selectedIndex: _selectedIndex,
-            onTabChange: (index){
+            onTabChange: (index) {
               setState(() {
                 _selectedIndex = index;
               });
             },
             tabs: const [
-              GButton(
-                  text: 'Home',
-                  icon: Icons.home
-              ),
-              GButton(
-                  text: 'Message',
-                  icon: Icons.message_rounded
-              ),
-              GButton(
-                  text: 'Settings',
-                  icon: Icons.settings
-              ),
-              GButton(
-                  text: 'Search',
-                  icon: Icons.search_sharp
-              ),
+              GButton(text: 'Home', icon: Icons.home),
+              GButton(text: 'Message', icon: Icons.message_rounded),
+              GButton(text: 'Settings', icon: Icons.settings),
+              GButton(text: 'Search', icon: Icons.search_sharp),
             ],
           ),
         ),

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:page_transition/page_transition.dart';
-
 import '../authentications/login_screen.dart';
 import '../tutee/Professors/accounting_professors.dart';
 import '../tutee/Professors/biology_professors_screen.dart';
@@ -26,7 +24,6 @@ class TuteeHomeScreen extends StatefulWidget {
 }
 
 class _TuteeHomeScreenState extends State<TuteeHomeScreen> {
-
   int _selectedIndex = 0;
 
   @override
@@ -46,7 +43,7 @@ class _TuteeHomeScreenState extends State<TuteeHomeScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: InkWell(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -116,7 +113,6 @@ class _TuteeHomeScreenState extends State<TuteeHomeScreen> {
   }
 }
 
-
 // TODO SUBJECTS SELECTED ROW TABS
 class SubjectsTab extends StatefulWidget {
   const SubjectsTab({Key? key}) : super(key: key);
@@ -135,7 +131,7 @@ class _SubjectsTabState extends State<SubjectsTab> {
         child: Row(
           children: [
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -164,8 +160,8 @@ class _SubjectsTabState extends State<SubjectsTab> {
                 child: const Text(
                   "Computer",
                   textAlign: TextAlign.center,
-                  style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -173,7 +169,7 @@ class _SubjectsTabState extends State<SubjectsTab> {
               width: 8.0,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -202,8 +198,8 @@ class _SubjectsTabState extends State<SubjectsTab> {
                 child: const Text(
                   "Mathematics",
                   textAlign: TextAlign.center,
-                  style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -211,7 +207,7 @@ class _SubjectsTabState extends State<SubjectsTab> {
               width: 8.0,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -240,8 +236,8 @@ class _SubjectsTabState extends State<SubjectsTab> {
                 child: const Text(
                   "Physics",
                   textAlign: TextAlign.center,
-                  style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -249,7 +245,7 @@ class _SubjectsTabState extends State<SubjectsTab> {
               width: 8.0,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -278,8 +274,8 @@ class _SubjectsTabState extends State<SubjectsTab> {
                 child: const Text(
                   "Chemistry",
                   textAlign: TextAlign.center,
-                  style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -287,7 +283,7 @@ class _SubjectsTabState extends State<SubjectsTab> {
               width: 8.0,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -316,8 +312,8 @@ class _SubjectsTabState extends State<SubjectsTab> {
                 child: const Text(
                   "Biology",
                   textAlign: TextAlign.center,
-                  style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -325,7 +321,7 @@ class _SubjectsTabState extends State<SubjectsTab> {
               width: 8.0,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -354,8 +350,8 @@ class _SubjectsTabState extends State<SubjectsTab> {
                 child: const Text(
                   "English",
                   textAlign: TextAlign.center,
-                  style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -363,7 +359,7 @@ class _SubjectsTabState extends State<SubjectsTab> {
               width: 8.0,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -392,8 +388,8 @@ class _SubjectsTabState extends State<SubjectsTab> {
                 child: const Text(
                   "Statistics",
                   textAlign: TextAlign.center,
-                  style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -401,7 +397,7 @@ class _SubjectsTabState extends State<SubjectsTab> {
               width: 8.0,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -430,8 +426,8 @@ class _SubjectsTabState extends State<SubjectsTab> {
                 child: const Text(
                   "Accounting",
                   textAlign: TextAlign.center,
-                  style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -439,7 +435,7 @@ class _SubjectsTabState extends State<SubjectsTab> {
               width: 8.0,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -468,8 +464,8 @@ class _SubjectsTabState extends State<SubjectsTab> {
                 child: const Text(
                   "Graphic Designing",
                   textAlign: TextAlign.center,
-                  style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -477,7 +473,7 @@ class _SubjectsTabState extends State<SubjectsTab> {
               width: 8.0,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -506,8 +502,8 @@ class _SubjectsTabState extends State<SubjectsTab> {
                 child: const Text(
                   "Flutter Development",
                   textAlign: TextAlign.center,
-                  style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -515,7 +511,7 @@ class _SubjectsTabState extends State<SubjectsTab> {
               width: 8.0,
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -544,8 +540,8 @@ class _SubjectsTabState extends State<SubjectsTab> {
                 child: const Text(
                   "Python",
                   textAlign: TextAlign.center,
-                  style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -555,7 +551,6 @@ class _SubjectsTabState extends State<SubjectsTab> {
     );
   }
 }
-
 
 // TODO TOP RATED TUTORS
 class TopRatedTutors extends StatefulWidget {
@@ -570,9 +565,11 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 15.0,),
+        const SizedBox(
+          height: 15.0,
+        ),
         GestureDetector(
-          onTap: (){
+          onTap: () {
             Navigator.push(
               context,
               PageTransition(
@@ -596,10 +593,8 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
                       color: Colors.white60,
                       offset: Offset(0.1, 0.2),
                       blurRadius: 4,
-                      spreadRadius: 0.2
-                  )
-                ]
-            ),
+                      spreadRadius: 0.2)
+                ]),
             child: const ListTile(
               title: Text(
                 "Shakeeb Ahmed Khan",
@@ -610,22 +605,21 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
               ),
               subtitle: Text(
                 "Computer",
-                style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 15),
+                style: TextStyle(color: Colors.white70, fontSize: 15),
               ),
               trailing: Text(
                 "Rs400 / HR",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 17,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -638,10 +632,8 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Ameer Sadiq",
@@ -652,21 +644,20 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
             ),
             subtitle: Text(
               "Mathematics",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs500 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -679,10 +670,8 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Flutter Developer",
@@ -693,21 +682,20 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
             ),
             subtitle: Text(
               "Computer",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs1000 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -720,10 +708,8 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Zain Jalil Khan",
@@ -734,21 +720,20 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
             ),
             subtitle: Text(
               "Biology",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs800 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -761,10 +746,8 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Omer Malik",
@@ -775,21 +758,20 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
             ),
             subtitle: Text(
               "Python",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs1500 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -802,10 +784,8 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Ijaz",
@@ -816,21 +796,20 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
             ),
             subtitle: Text(
               "Chemistry",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs600 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -843,10 +822,8 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Hina Naz",
@@ -857,21 +834,20 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
             ),
             subtitle: Text(
               "Statistics",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs1500 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -884,10 +860,8 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Ahmer Malik",
@@ -898,17 +872,14 @@ class _TopRatedTutorsState extends State<TopRatedTutors> {
             ),
             subtitle: Text(
               "Graphic Designing",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs1500 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         )

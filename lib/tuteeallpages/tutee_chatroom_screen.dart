@@ -14,7 +14,11 @@ class _TuteeChatRoomScreenState extends State<TuteeChatRoomScreen> {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: const Center(
-        child: Text("Chat Screen", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
+        child: Text(
+          "Chat Screen",
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+        ),
       ),
     );
   }

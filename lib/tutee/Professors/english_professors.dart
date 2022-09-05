@@ -23,8 +23,9 @@ class _EnglishTutorsState extends State<EnglishTutors> {
               height: 15.0,
             ),
             GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (ctx) => TutorProfileScreen()));
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (ctx) => TutorProfileScreen()));
               },
               child: Container(
                 margin: const EdgeInsets.symmetric(horizontal: 7.0),

@@ -94,22 +94,10 @@ class _ProfDashboardScreenState extends State<ProfDashboardScreen> {
             gap: 8.0,
             padding: const EdgeInsets.all(15),
             tabs: const [
-              GButton(
-                  text: 'Home',
-                  icon: Icons.home
-              ),
-              GButton(
-                  text: 'Message',
-                  icon: Icons.message_rounded
-              ),
-              GButton(
-                  text: 'Settings',
-                  icon: Icons.settings
-              ),
-              GButton(
-                  text: 'Search',
-                  icon: Icons.search_sharp
-              ),
+              GButton(text: 'Home', icon: Icons.home),
+              GButton(text: 'Message', icon: Icons.message_rounded),
+              GButton(text: 'Settings', icon: Icons.settings),
+              GButton(text: 'Search', icon: Icons.search_sharp),
             ],
           ),
         ),
@@ -131,9 +119,11 @@ class _StudentsListState extends State<StudentsList> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 15.0,),
+        const SizedBox(
+          height: 15.0,
+        ),
         GestureDetector(
-          onTap: (){
+          onTap: () {
             Navigator.push(
               context,
               PageTransition(
@@ -157,10 +147,8 @@ class _StudentsListState extends State<StudentsList> {
                       color: Colors.white60,
                       offset: Offset(0.1, 0.2),
                       blurRadius: 4,
-                      spreadRadius: 0.2
-                  )
-                ]
-            ),
+                      spreadRadius: 0.2)
+                ]),
             child: const ListTile(
               title: Text(
                 "Shakeeb Ahmed Khan",
@@ -171,22 +159,21 @@ class _StudentsListState extends State<StudentsList> {
               ),
               subtitle: Text(
                 "Computer",
-                style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 15),
+                style: TextStyle(color: Colors.white70, fontSize: 15),
               ),
               trailing: Text(
                 "Rs400 / HR",
                 style: TextStyle(
                     color: Colors.white,
                     fontSize: 17,
-                    fontWeight: FontWeight.bold
-                ),
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -199,10 +186,8 @@ class _StudentsListState extends State<StudentsList> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Ameer Sadiq",
@@ -213,21 +198,20 @@ class _StudentsListState extends State<StudentsList> {
             ),
             subtitle: Text(
               "Mathematics",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs500 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -240,10 +224,8 @@ class _StudentsListState extends State<StudentsList> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Flutter Developer",
@@ -254,21 +236,20 @@ class _StudentsListState extends State<StudentsList> {
             ),
             subtitle: Text(
               "Computer",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs1000 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -281,10 +262,8 @@ class _StudentsListState extends State<StudentsList> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Zain Jalil Khan",
@@ -295,21 +274,20 @@ class _StudentsListState extends State<StudentsList> {
             ),
             subtitle: Text(
               "Biology",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs800 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -322,10 +300,8 @@ class _StudentsListState extends State<StudentsList> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Omer Malik",
@@ -336,21 +312,20 @@ class _StudentsListState extends State<StudentsList> {
             ),
             subtitle: Text(
               "Python",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs1500 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -363,10 +338,8 @@ class _StudentsListState extends State<StudentsList> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Ijaz",
@@ -377,21 +350,20 @@ class _StudentsListState extends State<StudentsList> {
             ),
             subtitle: Text(
               "Chemistry",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs600 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -404,10 +376,8 @@ class _StudentsListState extends State<StudentsList> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Hina Naz",
@@ -418,21 +388,20 @@ class _StudentsListState extends State<StudentsList> {
             ),
             subtitle: Text(
               "Statistics",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs1500 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(
+          height: 8.0,
+        ),
         Container(
           margin: const EdgeInsets.symmetric(horizontal: 7.0),
           width: MediaQuery.of(context).size.width,
@@ -445,10 +414,8 @@ class _StudentsListState extends State<StudentsList> {
                     color: Colors.white60,
                     offset: Offset(0.1, 0.2),
                     blurRadius: 4,
-                    spreadRadius: 0.2
-                )
-              ]
-          ),
+                    spreadRadius: 0.2)
+              ]),
           child: const ListTile(
             title: Text(
               "Ahmer Malik",
@@ -459,17 +426,14 @@ class _StudentsListState extends State<StudentsList> {
             ),
             subtitle: Text(
               "Graphic Designing",
-              style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 15),
+              style: TextStyle(color: Colors.white70, fontSize: 15),
             ),
             trailing: Text(
               "Rs1500 / HR",
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 17,
-                  fontWeight: FontWeight.bold
-              ),
+                  fontWeight: FontWeight.bold),
             ),
           ),
         )

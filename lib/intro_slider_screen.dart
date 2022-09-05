@@ -14,45 +14,40 @@ class IntroSliderScreen extends StatefulWidget {
 }
 
 class _IntroSliderScreenState extends State<IntroSliderScreen> {
-
   List<Slide> slides = [];
 
   @override
   void initState() {
     super.initState();
-    slides.add(
-      Slide(
-        backgroundImage: "assets/images/intro.jpg",
-        backgroundImageFit: BoxFit.contain,
-        backgroundColor: Colors.white,
-      )
-    );
-    slides.add(
-        Slide(
-          backgroundImage: "assets/images/intro1.jpg",
-          backgroundImageFit: BoxFit.contain,
-          backgroundColor: Colors.white,
-        )
-    );
-    slides.add(
-        Slide(
-          backgroundImage: "assets/images/intro2.jpg",
-          backgroundImageFit: BoxFit.contain,
-          backgroundColor: Colors.white,
-        )
-    );
+    slides.add(Slide(
+      backgroundImage: "assets/images/intro.jpg",
+      backgroundImageFit: BoxFit.contain,
+      backgroundColor: Colors.white,
+    ));
+    slides.add(Slide(
+      backgroundImage: "assets/images/intro1.jpg",
+      backgroundImageFit: BoxFit.contain,
+      backgroundColor: Colors.white,
+    ));
+    slides.add(Slide(
+      backgroundImage: "assets/images/intro2.jpg",
+      backgroundImageFit: BoxFit.contain,
+      backgroundColor: Colors.white,
+    ));
   }
 
   void onDonePress() {
     // Do what you want
     log("End of slides");
-    Navigator.push(context, PageTransition(
-        type: PageTransitionType.leftToRight,
-        duration: const Duration(milliseconds: 600),
-        child: const HomeScreen(),
-        inheritTheme: true,
-        ctx: context,
-    ));
+    Navigator.push(
+        context,
+        PageTransition(
+          type: PageTransitionType.leftToRight,
+          duration: const Duration(milliseconds: 600),
+          child: const HomeScreen(),
+          inheritTheme: true,
+          ctx: context,
+        ));
   }
 
   @override
@@ -63,11 +58,12 @@ class _IntroSliderScreenState extends State<IntroSliderScreen> {
       colorDot: Colors.black,
       colorActiveDot: Colors.deepPurple,
       nextButtonStyle: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(Colors.deepPurple,),
+        foregroundColor: MaterialStateProperty.all(
+          Colors.deepPurple,
+        ),
       ),
       prevButtonStyle: ButtonStyle(
-        foregroundColor: MaterialStateProperty.all(Colors.deepPurple)
-      ),
+          foregroundColor: MaterialStateProperty.all(Colors.deepPurple)),
       skipButtonStyle: ButtonStyle(
         foregroundColor: MaterialStateProperty.all(Colors.deepPurple),
       ),
