@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:personal_portfolio/authentications/login_screen.dart';
 import 'package:personal_portfolio/tuteeallpages/my_account_screen.dart';
+import 'package:personal_portfolio/tuteeallpages/password_reset_screen.dart';
 
 import '../widgets/mywidets.dart';
 
@@ -61,25 +62,30 @@ class _TuteeSettingScreenState extends State<TuteeSettingScreen> {
                   ),
                 ),
               ),
-              Container(
-                height: 55,
-                width: 300,
-                margin: const EdgeInsets.only(top: 10),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: const ListTile(
-                  title: Text(
-                    "Password Reset",
-                    style: TextStyle(
-                        color: Colors.deepPurple,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w700),
+              InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const PasswordResetScreen()));
+                },
+                child: Container(
+                  height: 55,
+                  width: 300,
+                  margin: const EdgeInsets.only(top: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20.0),
                   ),
-                  trailing: Icon(
-                    Icons.lock_reset_rounded,
-                    color: Colors.deepPurple,
+                  child: const ListTile(
+                    title: Text(
+                      "Password Reset",
+                      style: TextStyle(
+                          color: Colors.deepPurple,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    trailing: Icon(
+                      Icons.lock_reset_rounded,
+                      color: Colors.deepPurple,
+                    ),
                   ),
                 ),
               ),

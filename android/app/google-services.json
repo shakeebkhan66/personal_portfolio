@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "329771891076",
+    "project_id": "tutorandtutee-6a3b3",
+    "storage_bucket": "tutorandtutee-6a3b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:329771891076:android:7320105298fe091ce105d1",
+        "android_client_info": {
+          "package_name": "com.example.personal_portfolio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "329771891076-1e3loorufr1ggp6rpnvq434n9ds64um0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADuis5-z-dACLGwm5Un08A8JD1VxQmRho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "329771891076-1e3loorufr1ggp6rpnvq434n9ds64um0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

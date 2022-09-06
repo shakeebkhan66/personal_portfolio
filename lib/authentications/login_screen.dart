@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_view.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:personal_portfolio/authentications/register_screen.dart';
 import 'package:personal_portfolio/tutee/home_screen.dart';
@@ -20,8 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
           child: ListView(
         children: [
           Container(
-            padding: const EdgeInsets.only(top: 20),
-            child: Image.asset("assets/images/ttt.png"),
+            padding: const EdgeInsets.only(top: 15),
+            child: Image.asset("assets/images/ttt.png", height: 290,),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -107,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 )),
           ),
           const SizedBox(
-            height: 70,
+            height: 30,
           ),
           Container(
               alignment: Alignment.bottomCenter,
@@ -119,8 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           builder: (ctx) => const RegisterScreen()));
                 },
                 child: RichText(
-                  text: TextSpan(children: [
-                    const TextSpan(
+                  text: const TextSpan(children: [
+                    TextSpan(
                       text: "No Account? ",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),
@@ -135,6 +137,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   ]),
                 ),
               )),
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
+            child: const Text("Or Login With!", style: TextStyle(color: Colors.white70),),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 80),
+            child: SignInButton(
+              Buttons.Google,
+              onPressed: (){},
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 80),
+            child: SignInButton(
+              Buttons.Facebook,
+              onPressed: (){},
+            ),
+          )
         ],
       )),
     );

@@ -13,6 +13,21 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool choice = false;
+  String? selectedSubject;
+
+  List subjects = [
+    "Computer",
+    "Mathematics",
+    "Physics",
+    "Chemistry",
+    "Biology",
+    "English",
+    "Statistics",
+    "Accounting",
+    "Graphic Designing",
+    "Flutter",
+    "Python"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +47,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: SafeArea(
           child: ListView(
         children: [
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 8.0,),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: TextFormField(
+              style: const TextStyle(color: Colors.white),
+              keyboardType: TextInputType.text,
               decoration: const InputDecoration(
                   hintText: "enter first name",
                   hintStyle: TextStyle(color: Colors.white54),
@@ -69,6 +84,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: TextFormField(
+              style: const TextStyle(color: Colors.white),
+              keyboardType: TextInputType.text,
               decoration: const InputDecoration(
                   hintText: "enter last name",
                   hintStyle: TextStyle(color: Colors.white54),
@@ -97,6 +114,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: TextFormField(
+              style: const TextStyle(color: Colors.white),
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                   hintText: "enter phone number",
                   hintStyle: TextStyle(color: Colors.white54),
@@ -125,6 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: TextFormField(
+              style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                   hintText: "enter your email",
                   hintStyle: TextStyle(color: Colors.white54),
@@ -153,38 +173,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               borderRadius: BorderRadius.circular(10.0),
             ),
             child: TextFormField(
+              style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                   hintText: "enter your password",
                   hintStyle: TextStyle(color: Colors.white54),
                   labelText: "Password",
-                  labelStyle: TextStyle(
-                      color: Colors.white70,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white70),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white70),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white70),
-                  )),
-            ),
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                  hintText: "confirm password",
-                  hintStyle: TextStyle(color: Colors.white54),
-                  labelText: "Confirm Password",
                   labelStyle: TextStyle(
                       color: Colors.white70,
                       fontWeight: FontWeight.bold,
@@ -235,28 +228,54 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: TextFormField(
-              decoration: InputDecoration(
-                fillColor: backgroundColor,
-                filled: true,
-                hintText: "how much do you charge per hour",
-                hintStyle: const TextStyle(color: Colors.white54),
-                labelText: "Charge Per Hour",
-                labelStyle: const TextStyle(
-                    color: Colors.white70,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16),
-                border: InputBorder.none,
+          choice == false
+              ? Container()
+              : Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+                child: DropdownButton(
+            dropdownColor: backgroundColor,
+                    hint:
+                        const Text('Select Subject', style: TextStyle(color: Colors.white),), // Not necessary for Option 1
+                    value: selectedSubject,
+                    onChanged: (newValue) {
+                      setState(() {
+                        selectedSubject = newValue.toString();
+                      });
+                    },
+                    items: subjects.map((subject) {
+                      return DropdownMenuItem(
+                        child: Text(subject, style: TextStyle(color: Colors.white),),
+                        value: subject,
+                      );
+                    }).toList(),
+                  ),
               ),
-            ),
-          ),
+          choice == false
+              ? Container()
+              : Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    style: const TextStyle(color: Colors.white),
+                    decoration: InputDecoration(
+                      fillColor: backgroundColor,
+                      filled: true,
+                      hintText: "how much do you charge per hour",
+                      hintStyle: const TextStyle(color: Colors.white54),
+                      labelText: "Charge Per Hour",
+                      labelStyle: const TextStyle(
+                          color: Colors.white70,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16),
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
           const SizedBox(
-            height: 10.0,
+            height: 15.0,
           ),
           Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -331,8 +350,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   );
                 },
                 child: RichText(
-                  text: TextSpan(children: [
-                    const TextSpan(
+                  text: const TextSpan(children: [
+                    TextSpan(
                       text: "Already have an account? ",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.bold),

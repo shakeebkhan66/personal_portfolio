@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:personal_portfolio/authentications/login_screen.dart';
 import 'package:personal_portfolio/tutee/home_screen.dart';
 import 'package:personal_portfolio/welcome_screen.dart';
 
@@ -25,12 +26,12 @@ class _IntroSliderScreenState extends State<IntroSliderScreen> {
       backgroundColor: Colors.white,
     ));
     slides.add(Slide(
-      backgroundImage: "assets/images/intro1.jpg",
+      backgroundImage: "assets/images/intro4.jpeg",
       backgroundImageFit: BoxFit.contain,
       backgroundColor: Colors.white,
     ));
     slides.add(Slide(
-      backgroundImage: "assets/images/intro2.jpg",
+      backgroundImage: "assets/images/intro5.jpg",
       backgroundImageFit: BoxFit.contain,
       backgroundColor: Colors.white,
     ));
@@ -44,7 +45,7 @@ class _IntroSliderScreenState extends State<IntroSliderScreen> {
         PageTransition(
           type: PageTransitionType.leftToRight,
           duration: const Duration(milliseconds: 600),
-          child: const HomeScreen(),
+          child: const LoginScreen(),
           inheritTheme: true,
           ctx: context,
         ));
