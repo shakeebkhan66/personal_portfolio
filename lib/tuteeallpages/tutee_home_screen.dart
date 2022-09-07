@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:personal_portfolio/providers/google_signin_providerclass.dart';
+import 'package:provider/provider.dart';
 import '../authentications/login_screen.dart';
 import '../tutee/Professors/accounting_professors.dart';
 import '../tutee/Professors/biology_professors_screen.dart';
@@ -25,9 +27,11 @@ class TuteeHomeScreen extends StatefulWidget {
 
 class _TuteeHomeScreenState extends State<TuteeHomeScreen> {
   int _selectedIndex = 0;
+  bool Loading = false;
 
   @override
   Widget build(BuildContext context) {
+    final myProvider = Provider.of<SignInAuthenticationProvider>(context);
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -42,18 +46,12 @@ class _TuteeHomeScreenState extends State<TuteeHomeScreen> {
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: InkWell(
+            child: Loading == false ? InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.leftToRight,
-                      alignment: Alignment.center,
-                      duration: const Duration(milliseconds: 500),
-                      child: const LoginScreen(),
-                      inheritTheme: true,
-                      ctx: context),
-                );
+                myProvider.signOut(context);
+                setState(() {
+                  Loading = true;
+                });
               },
               child: Container(
                 width: 45,
@@ -73,7 +71,7 @@ class _TuteeHomeScreenState extends State<TuteeHomeScreen> {
                   color: Colors.white,
                 ),
               ),
-            ),
+            ) : const Center(child: CircularProgressIndicator(color: Colors.white,),)
           )
         ],
       ),

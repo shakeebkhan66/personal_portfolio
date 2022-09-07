@@ -234,6 +234,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
                 child: DropdownButton(
             dropdownColor: backgroundColor,
+                    iconEnabledColor: Colors.white,
+                    iconDisabledColor: Colors.white,
                     hint:
                         const Text('Select Subject', style: TextStyle(color: Colors.white),), // Not necessary for Option 1
                     value: selectedSubject,

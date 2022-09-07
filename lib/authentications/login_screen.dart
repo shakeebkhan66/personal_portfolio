@@ -3,8 +3,10 @@ import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:personal_portfolio/authentications/register_screen.dart';
+import 'package:personal_portfolio/providers/google_signin_providerclass.dart';
 import 'package:personal_portfolio/tutee/home_screen.dart';
 import 'package:personal_portfolio/widgets/mywidets.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -14,8 +16,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool Loading = false;
+
   @override
   Widget build(BuildContext context) {
+    final googleSignInProvider =
+        Provider.of<SignInAuthenticationProvider>(context);
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(
@@ -23,7 +29,10 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           Container(
             padding: const EdgeInsets.only(top: 15),
-            child: Image.asset("assets/images/ttt.png", height: 290,),
+            child: Image.asset(
+              "assets/images/ttt.png",
+              height: 290,
+            ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -139,20 +148,30 @@ class _LoginScreenState extends State<LoginScreen> {
               )),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 25, horizontal: 20),
-            child: const Text("Or Login With!", style: TextStyle(color: Colors.white70),),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 80),
-            child: SignInButton(
-              Buttons.Google,
-              onPressed: (){},
+            child: const Text(
+              "Or Login With!",
+              style: TextStyle(color: Colors.white70),
             ),
           ),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 80),
+              child: Loading == false
+                  ? SignInButton(
+                      Buttons.Google,
+                      onPressed: () {
+                        googleSignInProvider.signInWithGoogle(context);
+                        setState(() {
+                          Loading = true;
+                        });
+                      },
+                    )
+                  : const Center(
+                      child: CircularProgressIndicator(color: Colors.white))),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 80),
             child: SignInButton(
               Buttons.Facebook,
-              onPressed: (){},
+              onPressed: () {},
             ),
           )
         ],
