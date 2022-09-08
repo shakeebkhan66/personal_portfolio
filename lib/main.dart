@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<SignInAuthenticationProvider>(create: (_) => SignInAuthenticationProvider())
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Tutor & Tutee',
         home: IntroSliderScreen(),
