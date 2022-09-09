@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
@@ -18,7 +19,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool choice = false;
   String? selectedSubject;
   final formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool Loading = false;
+  bool isLoading = false;
   FirebaseAuth auth = FirebaseAuth.instance;
 
   // TODO Phone Number Validation RegExp
@@ -52,47 +55,73 @@ class _RegisterScreenState extends State<RegisterScreen> {
     "Python"
   ];
 
-
-
   // TODO Validate TextField Function
-  void textFieldValidation(){
-    if(formKey.currentState!.validate()){
-      registerMe();
-    }else{
+  void textFieldValidation() async{
+    if (formKey.currentState!.validate()) {
+      print("Validatation Oka");
+      submit();
+      } else {
       print("no ok");
     }
-  }
-
-  // TODO Register User Function
-  void registerMe() async{
-    try{
-      User? user = FirebaseAuth.instance.currentUser;
-      if(user != null && user.emailVerified){
-        await user.sendEmailVerification();
-      }
-      auth.createUserWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text
-      ).then((signedInUser) async{
-            FirebaseFirestore.instance.collection("Students").doc(signedInUser.user!.uid).set({
-              "firstname": firstNameController.text,
-              "lastname": lastNameController.text,
-              "mobileNo": mobileController.text,
-              "email": emailController.text,
-              "password": passwordController.text
-            });
-
-      });
-    } on FirebaseAuthException catch(e){
-      if(e.code == "weak-password"){
-        print("The password provided is too weak.");
-      } else if(e.code == 'email-already-in-use'){
-        print("the account already exists for that email");
-      }
-
-    } catch(e){
-      print(e.toString());
     }
+    UserCredential? result;
+  void submit() async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+      print(result);
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user!.emailVerified) {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> const LoginScreen()));
+      }
+    } on PlatformException catch (error) {
+      var message = "Please Check Your Internet Connection ";
+      if (error.message != null) {
+        message = error.message!;
+      }
+      _scaffoldKey.currentState?.showSnackBar(SnackBar(
+        content: Text(message.toString()),
+        duration: const Duration(milliseconds: 600),
+        backgroundColor: Theme.of(context).primaryColor,
+      ));
+      setState(() {
+        isLoading = false;
+      });
+    } catch (error) {
+      setState(() {
+        isLoading = false;
+      });
+      _scaffoldKey.currentState?.showSnackBar(SnackBar(
+        content: Text(error.toString()),
+        duration: const Duration(milliseconds: 600),
+        backgroundColor: Theme.of(context).primaryColor,
+      ));
+
+      print(error);
+    }
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user!= null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+
+    FirebaseFirestore.instance.collection("AdminUserLogin").doc(result?.user!.uid).set({
+      "firstname": firstNameController.text,
+      "lastname": lastNameController.text,
+      "mobileNo": mobileController.text,
+      "email": emailController.text,
+      "password": passwordController.text,
+      "UserId": result?.user!.uid,
+      // "UserGender": isMale == true ? "Male" : "Female",
+    });
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (ctx) => const LoginScreen()));
+    setState(() {
+      isLoading = false;
+    });
   }
 
 
@@ -247,12 +276,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               child: TextFormField(
                 controller: emailController,
-                validator: (value){
-                  if(value!.isEmpty){
+                validator: (value) {
+                  if (value!.isEmpty) {
                     Fluttertoast.showToast(msg: "please provide your email");
-                  }else if(!regExpEmail.hasMatch(value)){
+                  } else if (!regExpEmail.hasMatch(value)) {
                     Fluttertoast.showToast(msg: "provide valid email");
-                  }return;
+                  }
+                  return;
                 },
                 style: const TextStyle(color: Colors.white),
                 decoration: const InputDecoration(
@@ -284,12 +314,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               child: TextFormField(
                 controller: passwordController,
-                validator: (value){
-                  if(value!.isEmpty){
+                validator: (value) {
+                  if (value!.isEmpty) {
                     Fluttertoast.showToast(msg: "please provide your password");
-                  }else if(value.length < 6){
-                    Fluttertoast.showToast(msg: "password should be greater than 6");
-                  }return;
+                  } else if (value.length < 6) {
+                    Fluttertoast.showToast(
+                        msg: "password should be greater than 6");
+                  }
+                  return;
                 },
                 style: const TextStyle(color: Colors.white),
                 decoration: const InputDecoration(
@@ -432,41 +464,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ],
                 )),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-              child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.0),
-                    color: buttonColor,
-                  ),
-                  child: Loading == false ? MaterialButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   PageTransition(
-                      //       type: PageTransitionType.leftToRight,
-                      //       alignment: Alignment.center,
-                      //       duration: const Duration(milliseconds: 500),
-                      //       child: const LoginScreen(),
-                      //       inheritTheme: true,
-                      //       ctx: context),
-                      // );
-                      textFieldValidation();
-                      setState(() {
-                        Loading = true;
-                      });
-                      setState(() {
-                        Loading = false;
-                      });
-                    },
-                    child: const Text(
-                      "R E G I S T E R",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w900),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 10.0, vertical: 15.0),
+                child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5.0),
+                      color: buttonColor,
                     ),
-                  ) : const Center(child: CircularProgressIndicator(color: Colors.white,))
-              )
-            ),
+                    child: Loading == false
+                        ? MaterialButton(
+                            onPressed: () {
+                              // Navigator.push(
+                              //   context,
+                              //   PageTransition(
+                              //       type: PageTransitionType.leftToRight,
+                              //       alignment: Alignment.center,
+                              //       duration: const Duration(milliseconds: 500),
+                              //       child: const LoginScreen(),
+                              //       inheritTheme: true,
+                              //       ctx: context),
+                              // );
+                              textFieldValidation();
+                              setState(() {
+                                Loading = true;
+                              });
+                              setState(() {
+                                Loading = false;
+                              });
+                            },
+                            child: const Text(
+                              "R E G I S T E R",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w900),
+                            ),
+                          )
+                        : const Center(
+                            child: CircularProgressIndicator(
+                            color: Colors.white,
+                          )))),
             // const SizedBox(
             //   height: 8.0,
             // ),

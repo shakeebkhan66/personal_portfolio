@@ -18,6 +18,10 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool Loading = false;
 
+
+
+
+
   @override
   Widget build(BuildContext context) {
     final googleSignInProvider =
@@ -169,10 +173,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: CircularProgressIndicator(color: Colors.white))),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 80),
-            child: SignInButton(
+            child: Loading == false ? SignInButton(
               Buttons.Facebook,
-              onPressed: () {},
-            ),
+              onPressed: () {
+                googleSignInProvider.signInWithFacebook(context);
+                setState(() {
+                  Loading = true;
+                });
+              },
+            ) : const Center(
+                child: CircularProgressIndicator(color: Colors.white))
           )
         ],
       )),
