@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">tutor&amp;tutee</string>
+    <string name="facebook_app_id">653149722986620</string>
+    <string name="fb_login_protocol_scheme">fb653149722986620</string>
+    <string name="facebook_client_token">351f40b8e0dd32cc079ffe4260b38ad9</string>
+
+
+</resources>

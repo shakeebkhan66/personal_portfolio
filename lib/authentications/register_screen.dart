@@ -23,6 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool Loading = false;
   bool isLoading = false;
   FirebaseAuth auth = FirebaseAuth.instance;
+  User? user = FirebaseAuth.instance.currentUser;
 
   // TODO Phone Number Validation RegExp
   RegExp regExpMobile = RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
@@ -58,70 +59,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
   // TODO Validate TextField Function
   void textFieldValidation() async{
     if (formKey.currentState!.validate()) {
-      print("Validatation Oka");
-      submit();
+      print("Validation oka");
+      registerUser();
       } else {
       print("no ok");
     }
     }
-    UserCredential? result;
-  void submit() async {
-    try {
-      setState(() {
-        isLoading = true;
+
+  // TODO Register User Function
+  void registerUser() async{
+    try{
+      FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        ).then((signedInUser) {
+          FirebaseFirestore.instance.collection("students").doc(signedInUser.user!.uid).set({
+            "firstName": firstNameController.text,
+            "lastName": lastNameController.text,
+            "mobileNo": mobileController.text,
+            "email": emailController.text,
+            "password": passwordController.text,
+          });
+          if(user !=null && !user!.emailVerified) {
+            user!.sendEmailVerification();
+          }
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Check your email for verification")));
       });
-      result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
-      print(result);
-      User? user = FirebaseAuth.instance.currentUser;
-      if (user!.emailVerified) {
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=> const LoginScreen()));
+    } on FirebaseException catch(e){
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
       }
-    } on PlatformException catch (error) {
-      var message = "Please Check Your Internet Connection ";
-      if (error.message != null) {
-        message = error.message!;
-      }
-      _scaffoldKey.currentState?.showSnackBar(SnackBar(
-        content: Text(message.toString()),
-        duration: const Duration(milliseconds: 600),
-        backgroundColor: Theme.of(context).primaryColor,
-      ));
-      setState(() {
-        isLoading = false;
-      });
-    } catch (error) {
-      setState(() {
-        isLoading = false;
-      });
-      _scaffoldKey.currentState?.showSnackBar(SnackBar(
-        content: Text(error.toString()),
-        duration: const Duration(milliseconds: 600),
-        backgroundColor: Theme.of(context).primaryColor,
-      ));
-
-      print(error);
+    } catch(e){
+      print(e.toString());
     }
-    User? user = FirebaseAuth.instance.currentUser;
-
-    if (user!= null && !user.emailVerified) {
-      await user.sendEmailVerification();
-    }
-
-    FirebaseFirestore.instance.collection("AdminUserLogin").doc(result?.user!.uid).set({
-      "firstname": firstNameController.text,
-      "lastname": lastNameController.text,
-      "mobileNo": mobileController.text,
-      "email": emailController.text,
-      "password": passwordController.text,
-      "UserId": result?.user!.uid,
-      // "UserGender": isMale == true ? "Male" : "Female",
-    });
-    Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(builder: (ctx) => const LoginScreen()));
-    setState(() {
-      isLoading = false;
-    });
+    Navigator.push(context, MaterialPageRoute(builder: (ctx) => const LoginScreen()));
   }
 
 
@@ -314,6 +287,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               child: TextFormField(
                 controller: passwordController,
+                obscureText: true,
                 validator: (value) {
                   if (value!.isEmpty) {
                     Fluttertoast.showToast(msg: "please provide your password");
@@ -471,26 +445,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       borderRadius: BorderRadius.circular(5.0),
                       color: buttonColor,
                     ),
-                    child: Loading == false
+                    child: isLoading == false
                         ? MaterialButton(
                             onPressed: () {
-                              // Navigator.push(
-                              //   context,
-                              //   PageTransition(
-                              //       type: PageTransitionType.leftToRight,
-                              //       alignment: Alignment.center,
-                              //       duration: const Duration(milliseconds: 500),
-                              //       child: const LoginScreen(),
-                              //       inheritTheme: true,
-                              //       ctx: context),
-                              // );
                               textFieldValidation();
-                              setState(() {
-                                Loading = true;
-                              });
-                              setState(() {
-                                Loading = false;
-                              });
+                                setState(() {
+                                  isLoading = true;
+                                });
+
                             },
                             child: const Text(
                               "R E G I S T E R",

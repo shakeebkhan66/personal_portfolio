@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:personal_portfolio/providers/google_signin_providerclass.dart';
+import 'package:personal_portfolio/providers/authentication_provider_class.dart';
 import 'package:provider/provider.dart';
 import '../authentications/login_screen.dart';
 import '../tutee/Professors/accounting_professors.dart';

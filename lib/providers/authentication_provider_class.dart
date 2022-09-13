@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -37,43 +35,27 @@ class SignInAuthenticationProvider with ChangeNotifier {
   }
 
   // TODO Facebook Sign In Function
-  void signInWithFacebook(context) async {
-    try {
-      final LoginResult result = await FacebookAuth.instance.login(permissions: (['email', 'public_profile']));
-      final token = result.accessToken!.token;
-      print('Facebook token userID : ${result.accessToken!.grantedPermissions}');
-      final graphResponse = await http.get(Uri.parse( 'https://graph.facebook.com/'
-          'v2.12/me?fields=name,first_name,last_name,email&access_token=${token}'));
+  Future<UserCredential> signInWithFacebook(context) async {
+    // Trigger the sign-in flow
+    final LoginResult loginResult = await FacebookAuth.instance.login(
+      // TODO Adding Permissions
+      permissions: ['email', 'public_profile', 'user_birthday']
+    );
 
-      final profile = jsonDecode(graphResponse.body);
-      print("Profile is equal to $profile");
-      try {
-        final AuthCredential facebookCredential = FacebookAuthProvider.credential(result.accessToken!.token);
-        final userCredential = await FirebaseAuth.instance.signInWithCredential(facebookCredential);
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
-      }catch(e)
-      {
-        final snackBar = SnackBar(
-          margin: const EdgeInsets.all(20),
-          behavior: SnackBarBehavior.floating,
-          content:  Text(e.toString()),
-          backgroundColor: (Colors.redAccent),
-          action: SnackBarAction(
-            label: 'dismiss',
-            onPressed: () {
-            },
-          ),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      }
+    // Create a credential from the access token
+    final OAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
 
-    } catch (e) {
-      print("error occurred");
-      print(e.toString());
-    }
+    final userData = FacebookAuth.instance.getUserData();
+
+    Navigator.push(context, PageTransition(type: PageTransitionType.bottomToTop,
+      duration: const Duration(milliseconds: 500),
+      ctx: context,
+      inheritTheme: true,
+      child: const HomeScreen(),
+    ));
+
+    // Once signed in, return the UserCredential
+    return FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
   }
 
 

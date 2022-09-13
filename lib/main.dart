@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_portfolio/providers/google_signin_providerclass.dart';
+import 'package:personal_portfolio/providers/authentication_provider_class.dart';
 import 'package:provider/provider.dart';
 import 'intro_slider_screen.dart';
 
