@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:personal_portfolio/authentications/register_screen.dart';
 import 'package:personal_portfolio/providers/authentication_provider_class.dart';
 import 'package:personal_portfolio/tutee/home_screen.dart';
 import 'package:personal_portfolio/widgets/mywidets.dart';
+import 'package:personal_portfolio/widgets/shared_preference_class.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -20,6 +20,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool Loading = false;
   bool isLoading = false;
+  bool loginLoading = false;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -49,6 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       User? user = FirebaseAuth.instance.currentUser;
       if(user!.emailVerified){
+        SharedPreferenceClass.preferences!.setBool("loggedIn", true);
         Navigator.push(context, MaterialPageRoute(builder: (ctx) => HomeScreen()));
       }else{
         Fluttertoast.showToast(msg: "Please Verify your email first");
@@ -169,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(5.0),
                     color: buttonColor,
                   ),
-                  child: MaterialButton(
+                  child: loginLoading == false ? MaterialButton(
                     onPressed: () {
                       // Navigator.push(
                       //   context,
@@ -182,13 +184,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       //       ctx: context),
                       // );
                       textFieldValidation();
+                      setState(() {
+                        loginLoading = true;
+                      });
                     },
                     child: const Text(
                       "L O G I N",
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w900),
                     ),
-                  )),
+                  ) : const Center(child: CircularProgressIndicator(color: Colors.white,),)
+              ),
             ),
             const SizedBox(
               height: 30,

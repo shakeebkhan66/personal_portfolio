@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:personal_portfolio/authentications/google_map_screen.dart';
 import 'package:personal_portfolio/authentications/login_screen.dart';
 import 'package:personal_portfolio/widgets/mywidets.dart';
 
@@ -411,32 +412,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const SizedBox(
               height: 15.0,
             ),
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 30,
-                      width: 170,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Colors.deepPurple.shade500,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: const Padding(
-                          padding: EdgeInsets.only(left: 9.0),
-                          child: Text(
-                            "A D D  L O C A T I O N",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white70,
-                                fontWeight: FontWeight.bold),
-                          )),
-                    )
-                  ],
-                )),
+            InkWell(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const GoogleMapScreen()));
+              },
+              child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 30,
+                        width: 170,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.deepPurple.shade500,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: const Padding(
+                            padding: EdgeInsets.only(left: 9.0),
+                            child: Text(
+                              "A D D  L O C A T I O N",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      )
+                    ],
+                  )),
+            ),
             Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 10.0, vertical: 15.0),

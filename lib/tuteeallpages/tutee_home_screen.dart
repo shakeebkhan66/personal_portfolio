@@ -17,6 +17,7 @@ import '../tutee/Professors/stats_professors.dart';
 import '../tutee/my_drawer.dart';
 import '../tutee/tutor_profile_screen.dart';
 import '../widgets/mywidets.dart';
+import '../widgets/shared_preference_class.dart';
 
 class TuteeHomeScreen extends StatefulWidget {
   const TuteeHomeScreen({Key? key}) : super(key: key);
@@ -49,6 +50,7 @@ class _TuteeHomeScreenState extends State<TuteeHomeScreen> {
             child: Loading == false ? InkWell(
               onTap: () {
                 myProvider.signOut(context);
+                SharedPreferenceClass.preferences!.setBool("loggedIn", false);
                 setState(() {
                   Loading = true;
                 });
