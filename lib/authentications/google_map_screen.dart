@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:personal_portfolio/SharedPref/shared_preference_class.dart';
 
 class GoogleMapScreen extends StatefulWidget {
   const GoogleMapScreen({Key? key}) : super(key: key);
@@ -57,6 +58,11 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
         onPressed: () {
           getUserCurrentLocation().then((value) async{
             print("My Current Location");
+
+            // TODO SharedPreference Class To Store Latitude & Longitude
+            SharedPreferenceClass.preferences?.setDouble("latitude", value.latitude.toDouble());
+            SharedPreferenceClass.preferences?.setDouble("longitude", value.longitude.toDouble());
+
             print(value.latitude.toString() + " " + value.longitude.toString());
             _markers.add(Marker(
                 markerId: const MarkerId("2"),

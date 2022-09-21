@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:personal_portfolio/SharedPref/shared_preference_class.dart';
 import 'package:personal_portfolio/authentications/google_map_screen.dart';
 import 'package:personal_portfolio/authentications/login_screen.dart';
 import 'package:personal_portfolio/widgets/mywidets.dart';
@@ -42,6 +43,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController chargePerHourController = TextEditingController();
+  String? latitude;
+  String? longitude;
+
 
   List subjects = [
     "Computer",
@@ -74,12 +78,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           email: emailController.text,
           password: passwordController.text,
         ).then((signedInUser) {
-          FirebaseFirestore.instance.collection("students").doc(signedInUser.user!.uid).set({
+          FirebaseFirestore.instance.collection("tutor&tutte").doc(signedInUser.user!.uid).set({
             "firstName": firstNameController.text,
             "lastName": lastNameController.text,
             "mobileNo": mobileController.text,
             "email": emailController.text,
             "password": passwordController.text,
+            "latitude": double.parse(latitude.toString()),
+            "longitude": double.parse(longitude.toString()),
           });
           if(user !=null && !user!.emailVerified) {
             user!.sendEmailVerification();
@@ -98,6 +104,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
     Navigator.push(context, MaterialPageRoute(builder: (ctx) => const LoginScreen()));
   }
 
+
+  @override
+  void initState() {
+    // TODO Store Latitude & Longitude in Variable from SharedPreference
+     latitude = SharedPreferenceClass.preferences?.getDouble("latitude").toString();
+    longitude = SharedPreferenceClass.preferences?.getDouble("longitude").toString();
+    print("My Latitude  $latitude");
+    print("My longitude $longitude");
+    super.initState();
+  }
 
 
   @override
@@ -337,7 +353,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       toggleSize: 15.0,
                       borderRadius: 30.0,
                       padding: 8.0,
-                      showOnOff: true,
+                      showOnOff: false,
                       activeColor: Colors.deepPurple,
                       value: choice,
                       onToggle: (val) {

@@ -7,7 +7,7 @@ import 'package:personal_portfolio/authentications/register_screen.dart';
 import 'package:personal_portfolio/providers/authentication_provider_class.dart';
 import 'package:personal_portfolio/tutee/home_screen.dart';
 import 'package:personal_portfolio/widgets/mywidets.dart';
-import 'package:personal_portfolio/widgets/shared_preference_class.dart';
+import 'package:personal_portfolio/SharedPref/shared_preference_class.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -173,20 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   child: loginLoading == false ? MaterialButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   PageTransition(
-                      //       type: PageTransitionType.leftToRight,
-                      //       alignment: Alignment.center,
-                      //       duration: const Duration(milliseconds: 500),
-                      //       child: const HomeScreen(),
-                      //       inheritTheme: true,
-                      //       ctx: context),
-                      // );
                       textFieldValidation();
-                      setState(() {
-                        loginLoading = true;
-                      });
                     },
                     child: const Text(
                       "L O G I N",

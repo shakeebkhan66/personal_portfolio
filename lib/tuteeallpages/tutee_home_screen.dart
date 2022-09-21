@@ -17,7 +17,7 @@ import '../tutee/Professors/stats_professors.dart';
 import '../tutee/my_drawer.dart';
 import '../tutee/tutor_profile_screen.dart';
 import '../widgets/mywidets.dart';
-import '../widgets/shared_preference_class.dart';
+import '../SharedPref/shared_preference_class.dart';
 
 class TuteeHomeScreen extends StatefulWidget {
   const TuteeHomeScreen({Key? key}) : super(key: key);
