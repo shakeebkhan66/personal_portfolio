@@ -1,10 +1,15 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:personal_portfolio/SharedPref/shared_preference_class.dart';
 import 'package:personal_portfolio/authentications/google_map_screen.dart';
 import 'package:personal_portfolio/authentications/login_screen.dart';
@@ -45,6 +50,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController chargePerHourController = TextEditingController();
   String? latitude;
   String? longitude;
+  String? imageFile;
+  final picker = ImagePicker();
 
 
   List subjects = [
@@ -71,7 +78,99 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
     }
 
+  // ToDo Pick Image & Upload Image
+  // Future pickImage() async{
+  //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  //   setState(() {
+  //     imageFile = File(pickedFile!.path);
+  //   });
+  // }
+
+
   // TODO Register User Function
+
+  // ToDo Pick Image From Gallery
+  // FirebaseStorage storage = FirebaseStorage.instance;
+  //
+  // File? _photo;
+  // final ImagePicker _picker = ImagePicker();
+  //
+  // Future imgFromGallery() async {
+  //   final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+  //
+  //   setState(() {
+  //     if (pickedFile != null) {
+  //       _photo = File(pickedFile.path);
+  //       uploadFile();
+  //     } else {
+  //       print('No image selected.');
+  //     }
+  //   });
+  // }
+  //
+  // Future imgFromCamera() async {
+  //   final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+  //
+  //   setState(() {
+  //     if (pickedFile != null) {
+  //       _photo = File(pickedFile.path);
+  //       uploadFile();
+  //     } else {
+  //       print('No image selected.');
+  //     }
+  //   });
+  // }
+  //
+  // Future uploadFile() async {
+  //   if (_photo == null) return;
+  //   final fileName = basename(_photo!.path);
+  //   final destination = 'files/$fileName';
+  //
+  //   try {
+  //     final ref = FirebaseStorage.instance
+  //         .ref(destination)
+  //         .child('file/');
+  //     await ref.putFile(_photo!);
+  //   } catch (e) {
+  //     print('error occured');
+  //   }
+  // }
+
+
+
+  // ToDo Upload Image
+  uploadImage() async {
+    final _firebaseStorage = FirebaseStorage.instance;
+    final _imagePicker = ImagePicker();
+    PickedFile? image;
+    //Check Permissions
+    await Permission.photos.request();
+
+    var permissionStatus = await Permission.photos.status;
+
+    if (permissionStatus.isGranted){
+      //Select Image
+      image = await _imagePicker.getImage(source: ImageSource.gallery);
+      var file = File(image!.path);
+
+      if (image != null){
+        //Upload to Firebase
+        var snapshot = await _firebaseStorage.ref()
+            .child('images/imageName')
+            .putFile(file);
+        var downloadUrl = await snapshot.ref.getDownloadURL();
+        setState(() {
+          imageFile = downloadUrl;
+        });
+      } else {
+        print('No Image Path Received');
+      }
+    } else {
+      print('Permission not granted. Try Again with permission access');
+    }
+  }
+
+
   void registerUser() async{
     try{
       FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -449,7 +548,37 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: const Padding(
                             padding: EdgeInsets.only(left: 9.0),
                             child: Text(
-                              "A D D  L O C A T I O N",
+                              "A D D   L O C A T I O N",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.white70,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                      )
+                    ],
+                  )),
+            ),
+            const SizedBox(height: 6.0,),
+            InkWell(
+              onTap: uploadImage,
+              child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 30,
+                        width: 170,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.deepPurple.shade500,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: const Padding(
+                            padding: EdgeInsets.only(left: 5.0),
+                            child: Text(
+                              "A D D   I M A G E",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.white70,

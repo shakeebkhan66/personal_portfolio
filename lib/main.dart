@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Tutor & Tutee',
         home: SharedPreferenceClass.preferences?.getBool("loggedIn") == true
-        ? HomeScreen()
-        : IntroSliderScreen(),
+        ? const HomeScreen()
+        : const IntroSliderScreen(),
       ),
     );
   }
