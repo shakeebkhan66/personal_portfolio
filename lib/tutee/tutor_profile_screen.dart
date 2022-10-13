@@ -1,6 +1,6 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../widgets/mywidets.dart';
 
 class TutorProfileScreen extends StatefulWidget {
@@ -11,6 +11,8 @@ class TutorProfileScreen extends StatefulWidget {
 }
 
 class _TutorProfileScreenState extends State<TutorProfileScreen> {
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -219,49 +221,7 @@ class _TutorProfileScreenState extends State<TutorProfileScreen> {
                 )
               ],
             )
-            // Container(
-            //   padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 100),
-            //   child: Row(
-            //     children: [
-            //       Container(
-            //         height: 45,
-            //         width: 50,
-            //         decoration: BoxDecoration(
-            //           color: Colors.deepPurple.shade400,
-            //           borderRadius: BorderRadius.circular(5),
-            //             boxShadow: const [
-            //               BoxShadow(
-            //                   color: Colors.white38,
-            //                   offset: Offset(0.1, 0.2),
-            //                   blurRadius: 5,
-            //                   spreadRadius: 0.1
-            //               )
-            //             ]
-            //         ),
-            //         child: const  Icon(Icons.message_rounded, color: Colors.white,),
-            //       ),
-            //       const SizedBox(width: 10),
-            //       Container(
-            //         height: 45,
-            //         width: 90,
-            //         alignment: Alignment.center,
-            //         decoration: BoxDecoration(
-            //             color: Colors.deepPurple.shade400,
-            //             borderRadius: BorderRadius.circular(5.0),
-            //             boxShadow: const [
-            //               BoxShadow(
-            //                   color: Colors.white38,
-            //                   offset: Offset(0.1, 0.2),
-            //                   blurRadius: 5,
-            //                   spreadRadius: 0.1
-            //               )
-            //             ]
-            //         ),
-            //         child: const Text("H I R E  M E", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
-            //       )
-            //     ],
-            //   ),
-            // )
+
           ],
         ),
       ),

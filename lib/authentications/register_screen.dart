@@ -29,6 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   bool Loading = false;
   bool isLoading = false;
+  bool imageLoading = false;
   FirebaseAuth auth = FirebaseAuth.instance;
   User? user = FirebaseAuth.instance.currentUser;
 
@@ -139,6 +140,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
 
   // ToDo Upload Image
+
+
   uploadImage() async {
     final _firebaseStorage = FirebaseStorage.instance;
     final _imagePicker = ImagePicker();
@@ -161,6 +164,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         var downloadUrl = await snapshot.ref.getDownloadURL();
         setState(() {
           imageFile = downloadUrl;
+          Fluttertoast.showToast(msg: "Image Get Successfully");
         });
       } else {
         print('No Image Path Received');
@@ -185,17 +189,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
             "password": passwordController.text,
             "latitude": double.parse(latitude.toString()),
             "longitude": double.parse(longitude.toString()),
+            "image": imageFile,
           });
           if(user !=null && !user!.emailVerified) {
             user!.sendEmailVerification();
+            Fluttertoast.showToast(msg: "Check your email for verification");
           }
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Check your email for verification")));
       });
     } on FirebaseException catch(e){
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        Fluttertoast.showToast(msg: "The account already exists for that email.");
       }
     } catch(e){
       print(e.toString());
