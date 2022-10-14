@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:personal_portfolio/authentications/register_screen.dart';
 import 'package:personal_portfolio/providers/authentication_provider_class.dart';
@@ -9,6 +12,8 @@ import 'package:personal_portfolio/tutee/home_screen.dart';
 import 'package:personal_portfolio/widgets/mywidets.dart';
 import 'package:personal_portfolio/SharedPref/shared_preference_class.dart';
 import 'package:provider/provider.dart';
+
+import 'forgot_password_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -32,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
       r'+\.)+[a-zA-Z]{2,}))$');
 
   // TODO Validation Function
-  void textFieldValidation() async{
+  void textFieldValidation() async {
     if (formKey.currentState!.validate()) {
       print("Validation oka");
       signInUser();
@@ -42,31 +47,37 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // TODO Sign In Function
-  void signInUser() async{
-    try{
+  void signInUser() async {
+    try {
+      setState(() {
+        loginLoading = true;
+      });
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
+        email: emailController.text,
+        password: passwordController.text,
       );
       User? user = FirebaseAuth.instance.currentUser;
-      if(user!.emailVerified){
+      if (user!.emailVerified) {
         SharedPreferenceClass.preferences!.setBool("loggedIn", true);
-        Navigator.push(context, MaterialPageRoute(builder: (ctx) => HomeScreen()));
-      }else{
+        Navigator.push(
+            context, MaterialPageRoute(builder: (ctx) => HomeScreen()));
+        setState(() {
+          loginLoading = false;
+        });
+      } else {
         Fluttertoast.showToast(msg: "Please Verify your email first");
       }
-    } on FirebaseAuthException catch(e){
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
       }
-    } catch(e){
+    } catch (e) {
       print(e.toString());
       Fluttertoast.showToast(msg: e.toString());
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: backgroundColor,
       body: SafeArea(
           child: Form(
-            key: formKey,
-            child: ListView(
-        children: [
+        key: formKey,
+        child: ListView(
+          children: [
             Container(
               padding: const EdgeInsets.only(top: 15),
               child: Image.asset(
@@ -92,6 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: TextFormField(
+                cursorColor: Colors.white,
                 controller: emailController,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -130,6 +142,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: TextFormField(
+                cursorColor: Colors.white,
                 controller: passwordController,
                 obscureText: true,
                 validator: (value) {
@@ -171,16 +184,46 @@ class _LoginScreenState extends State<LoginScreen> {
                     borderRadius: BorderRadius.circular(5.0),
                     color: buttonColor,
                   ),
-                  child: loginLoading == false ? MaterialButton(
-                    onPressed: () {
-                      textFieldValidation();
-                    },
-                    child: const Text(
-                      "L O G I N",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w900),
-                    ),
-                  ) : const Center(child: CircularProgressIndicator(color: Colors.white,),)
+                  child:
+                  // loginLoading == false
+                  //     ?
+                  MaterialButton(
+                          onPressed: () {
+                            textFieldValidation();
+                          },
+                          child: const Text(
+                            "L O G I N",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w900),
+                          ),
+                        )
+
+                      // : const Center(
+                      //     child: CircularProgressIndicator(
+                      //       color: Colors.white,
+                      //     ),
+                      //   )
+      ),
+            ),
+            const SizedBox(
+              height: 5.0,
+            ),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ForgotPasswordScreen()));
+              },
+              child: Container(
+                padding: const EdgeInsets.only(left: 220),
+                child: const Text(
+                  "Forgot Password?",
+                  style: TextStyle(
+                      color: Colors.white70,
+                      decoration: TextDecoration.underline),
+                ),
               ),
             ),
             const SizedBox(
@@ -234,21 +277,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     : const Center(
                         child: CircularProgressIndicator(color: Colors.white))),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 80),
-              child: isLoading == false ? SignInButton(
-                Buttons.Facebook,
-                onPressed: () {
-                  googleSignInProvider.signInWithFacebook(context);
-                  setState(() {
-                    isLoading = true;
-                  });
-                },
-              ) : const Center(
-                  child: CircularProgressIndicator(color: Colors.white))
-            )
-        ],
-      ),
-          )),
+                padding: const EdgeInsets.symmetric(horizontal: 80),
+                child: isLoading == false
+                    ? SignInButton(
+                        Buttons.Facebook,
+                        onPressed: () {
+                          googleSignInProvider.signInWithFacebook(context);
+                          setState(() {
+                            isLoading = true;
+                          });
+                        },
+                      )
+                    : const Center(
+                        child: CircularProgressIndicator(color: Colors.white)))
+          ],
+        ),
+      )),
     );
   }
 }

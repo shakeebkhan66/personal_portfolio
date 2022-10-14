@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:personal_portfolio/providers/authentication_provider_class.dart';
 import 'package:provider/provider.dart';
-import '../authentications/login_screen.dart';
 import '../tutee/Professors/accounting_professors.dart';
 import '../tutee/Professors/biology_professors_screen.dart';
 import '../tutee/Professors/chemistry_professors_screen.dart';
@@ -33,82 +32,87 @@ class _TuteeHomeScreenState extends State<TuteeHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final myProvider = Provider.of<SignInAuthenticationProvider>(context);
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: AppBar(
+    return WillPopScope(
+      onWillPop: () async{
+        return false;
+      },
+      child: Scaffold(
         backgroundColor: backgroundColor,
-        elevation: 0.1,
-        title: const Center(
-          child: Text(
-            "T U T E E",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        appBar: AppBar(
+          backgroundColor: backgroundColor,
+          elevation: 0.1,
+          title: const Center(
+            child: Text(
+              "T U T E E",
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
           ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-            child: Loading == false ? InkWell(
-              onTap: () {
-                myProvider.signOut(context);
-                SharedPreferenceClass.preferences!.setBool("loggedIn", false);
-                setState(() {
-                  Loading = true;
-                });
-              },
-              child: Container(
-                width: 45,
-                // margin: EdgeInsets.only(right: 14.0),
-                decoration: BoxDecoration(
-                    color: Colors.deepPurple.shade400,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Colors.white30,
-                          offset: Offset(0.1, 0.2),
-                          blurRadius: 13,
-                          spreadRadius: 1.0)
-                    ]),
-                child: const Icon(
-                  Icons.logout,
-                  color: Colors.white,
-                ),
-              ),
-            ) : const Center(child: CircularProgressIndicator(color: Colors.white,),)
-          )
-        ],
-      ),
-      body: SafeArea(
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            const SizedBox(
-              height: 28,
-            ),
-            const SubjectsTab(),
-            const SizedBox(
-              height: 35,
-            ),
-            Container(
-              padding: const EdgeInsets.only(left: 7.0),
-              child: const Text(
-                "T O P  R A T E D  T U T O R S",
-                style: TextStyle(
+          actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+              child: Loading == false ? InkWell(
+                onTap: () {
+                  myProvider.signOut(context);
+                  SharedPreferenceClass.preferences!.setBool("loggedIn", false);
+                  setState(() {
+                    Loading = true;
+                  });
+                },
+                child: Container(
+                  width: 45,
+                  // margin: EdgeInsets.only(right: 14.0),
+                  decoration: BoxDecoration(
+                      color: Colors.deepPurple.shade400,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                            color: Colors.white30,
+                            offset: Offset(0.1, 0.2),
+                            blurRadius: 13,
+                            spreadRadius: 1.0)
+                      ]),
+                  child: const Icon(
+                    Icons.logout,
                     color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 20),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            // TODO TOP RATED TUTORS
-            const TopRatedTutors(),
+                  ),
+                ),
+              ) : const Center(child: CircularProgressIndicator(color: Colors.white,),)
+            )
           ],
         ),
-      ),
+        body: SafeArea(
+          child: ListView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              const SizedBox(
+                height: 28,
+              ),
+              const SubjectsTab(),
+              const SizedBox(
+                height: 35,
+              ),
+              Container(
+                padding: const EdgeInsets.only(left: 7.0),
+                child: const Text(
+                  "T O P  R A T E D  T U T O R S",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 20),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              // TODO TOP RATED TUTORS
+              const TopRatedTutors(),
+            ],
+          ),
+        ),
 
-      // TODO MyDrawer
-      drawer: const MyDrawer(),
+        // TODO MyDrawer
+        drawer: const MyDrawer(),
+      ),
     );
   }
 }

@@ -11,13 +11,18 @@ class TuteeChatRoomScreen extends StatefulWidget {
 class _TuteeChatRoomScreenState extends State<TuteeChatRoomScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      body: const Center(
-        child: Text(
-          "Chat Screen",
-          style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: backgroundColor,
+        body: const Center(
+          child: Text(
+            "Chat Screen",
+            style: TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          ),
         ),
       ),
     );

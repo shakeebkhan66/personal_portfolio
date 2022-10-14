@@ -4,7 +4,6 @@ import 'package:intro_slider/intro_slider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:personal_portfolio/authentications/login_screen.dart';
 
-
 class IntroSliderScreen extends StatefulWidget {
   const IntroSliderScreen({Key? key}) : super(key: key);
 

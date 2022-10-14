@@ -79,67 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     }
     }
 
-  // ToDo Pick Image & Upload Image
-  // Future pickImage() async{
-  //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-  //   setState(() {
-  //     imageFile = File(pickedFile!.path);
-  //   });
-  // }
 
-
-  // TODO Register User Function
-
-  // ToDo Pick Image From Gallery
-  // FirebaseStorage storage = FirebaseStorage.instance;
-  //
-  // File? _photo;
-  // final ImagePicker _picker = ImagePicker();
-  //
-  // Future imgFromGallery() async {
-  //   final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-  //
-  //   setState(() {
-  //     if (pickedFile != null) {
-  //       _photo = File(pickedFile.path);
-  //       uploadFile();
-  //     } else {
-  //       print('No image selected.');
-  //     }
-  //   });
-  // }
-  //
-  // Future imgFromCamera() async {
-  //   final pickedFile = await _picker.pickImage(source: ImageSource.camera);
-  //
-  //   setState(() {
-  //     if (pickedFile != null) {
-  //       _photo = File(pickedFile.path);
-  //       uploadFile();
-  //     } else {
-  //       print('No image selected.');
-  //     }
-  //   });
-  // }
-  //
-  // Future uploadFile() async {
-  //   if (_photo == null) return;
-  //   final fileName = basename(_photo!.path);
-  //   final destination = 'files/$fileName';
-  //
-  //   try {
-  //     final ref = FirebaseStorage.instance
-  //         .ref(destination)
-  //         .child('file/');
-  //     await ref.putFile(_photo!);
-  //   } catch (e) {
-  //     print('error occured');
-  //   }
-  // }
-
-
-
-  // ToDo Upload Image
 
 
   uploadImage() async {
@@ -189,6 +129,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
             "password": passwordController.text,
             "latitude": double.parse(latitude.toString()),
             "longitude": double.parse(longitude.toString()),
+            "chargeHour": chargePerHourController.text,
+            "selectedSubject": selectedSubject,
             "image": imageFile,
           });
           if(user !=null && !user!.emailVerified) {
@@ -250,6 +192,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: TextFormField(
+                cursorColor: Colors.white,
                 controller: firstNameController,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -290,6 +233,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: TextFormField(
+                cursorColor: Colors.white,
                 controller: lastNameController,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -330,6 +274,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: TextFormField(
+                cursorColor: Colors.white,
                 validator: (value) {
                   if (value!.isEmpty) {
                     Fluttertoast.showToast(
@@ -370,6 +315,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: TextFormField(
+                cursorColor: Colors.white,
                 controller: emailController,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -408,6 +354,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: TextFormField(
+                cursorColor: Colors.white,
                 controller: passwordController,
                 obscureText: true,
                 validator: (value) {
@@ -513,6 +460,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: TextFormField(
+                      cursorColor: Colors.white,
                       controller: chargePerHourController,
                       keyboardType: TextInputType.number,
                       style: const TextStyle(color: Colors.white),
