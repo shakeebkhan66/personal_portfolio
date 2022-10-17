@@ -31,16 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool isLoading = false;
   bool imageLoading = false;
   FirebaseAuth auth = FirebaseAuth.instance;
-  User? user = FirebaseAuth.instance.currentUser;
-
-  // TODO Phone Number Validation RegExp
-  RegExp regExpMobile = RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
-
-  // TODO Email Validation RegExp
-  RegExp regExpEmail = RegExp(
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))'
-      r'@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]'
-      r'+\.)+[a-zA-Z]{2,}))$');
+  final user = FirebaseAuth.instance.currentUser;
 
   // TODO Text Editing Controllers
   TextEditingController firstNameController = TextEditingController();
@@ -54,6 +45,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String? imageFile;
   final picker = ImagePicker();
 
+  // TODO Phone Number Validation RegExp
+  RegExp regExpMobile = RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
+
+  // TODO Email Validation RegExp
+  RegExp regExpEmail = RegExp(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))'
+      r'@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]'
+      r'+\.)+[a-zA-Z]{2,}))$');
 
   List subjects = [
     "Computer",
@@ -70,98 +69,138 @@ class _RegisterScreenState extends State<RegisterScreen> {
   ];
 
   // TODO Validate TextField Function
-  void textFieldValidation() async{
+  void textFieldValidation() async {
     if (formKey.currentState!.validate()) {
       print("Validation oka");
       registerUser();
-      } else {
+    } else {
       print("no ok");
     }
-    }
+  }
+
+  // uploadImage() async {
+  //   final _firebaseStorage = FirebaseStorage.instance;
+  //   final _imagePicker = ImagePicker();
+  //   PickedFile? image;
+  //   //Check Permissions
+  //   await Permission.photos.request();
+  //
+  //   var permissionStatus = await Permission.photos.status;
+  //
+  //   if (permissionStatus.isGranted) {
+  //     //Select Image
+  //     image = await _imagePicker.getImage(source: ImageSource.gallery);
+  //     var file = File(image!.path);
+  //
+  //     if (image != null) {
+  //       //Upload to Firebase
+  //       var snapshot = await _firebaseStorage
+  //           .ref()
+  //           .child('images')
+  //           .putFile(file);
+  //       var downloadUrl = await snapshot.ref.getDownloadURL();
+  //       setState(() {
+  //         imageFile = downloadUrl;
+  //         Fluttertoast.showToast(msg: "Image Get Successfully");
+  //       });
+  //     } else {
+  //       print('No Image Path Received');
+  //     }
+  //   } else {
+  //     print('Permission not granted. Try Again with permission access');
+  //   }
+  // }
 
 
+  // TODO Pick Image and Upload It
 
+  /// Active image file
+  File? _imageFile;
+  String? imageSnap;
 
-  uploadImage() async {
-    final _firebaseStorage = FirebaseStorage.instance;
-    final _imagePicker = ImagePicker();
-    PickedFile? image;
-    //Check Permissions
+  /// Select an image via gallery
+  Future pickImage(ImageSource source) async {
     await Permission.photos.request();
-
     var permissionStatus = await Permission.photos.status;
-
-    if (permissionStatus.isGranted){
-      //Select Image
-      image = await _imagePicker.getImage(source: ImageSource.gallery);
-      var file = File(image!.path);
-
-      if (image != null){
-        //Upload to Firebase
-        var snapshot = await _firebaseStorage.ref()
-            .child('images/imageName')
-            .putFile(file);
-        var downloadUrl = await snapshot.ref.getDownloadURL();
-        setState(() {
-          imageFile = downloadUrl;
-          Fluttertoast.showToast(msg: "Image Get Successfully");
-        });
-      } else {
-        print('No Image Path Received');
-      }
-    } else {
+    if(permissionStatus.isGranted){
+      XFile? selected = (await ImagePicker().pickImage(source: source)) as XFile;
+      /// Upload Image to Firebase
+      final file = File(selected.path);
+      final destination = "${emailController.text}/${DateTime.now()}.png";
+      Reference reference =
+      FirebaseStorage.instance.ref("Profile_Images").child(destination);
+      UploadTask _uploadTask = reference.putFile(file);
+      _uploadTask.whenComplete(() async {
+        try {
+          String uploadedImageUrl = await reference.getDownloadURL();
+          imageSnap = uploadedImageUrl;
+          // showToaster("Image uploaded successfully");
+          print("This is URL: $imageSnap");
+        } catch (e) {
+          print(e.toString());
+          print("Image Get Successfully");
+        }
+      });
+    }else {
       print('Permission not granted. Try Again with permission access');
     }
   }
 
-
-  void registerUser() async{
-    try{
-      FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text,
-          password: passwordController.text,
-        ).then((signedInUser) {
-          FirebaseFirestore.instance.collection("tutor&tutte").doc(signedInUser.user!.uid).set({
-            "firstName": firstNameController.text,
-            "lastName": lastNameController.text,
-            "mobileNo": mobileController.text,
-            "email": emailController.text,
-            "password": passwordController.text,
-            "latitude": double.parse(latitude.toString()),
-            "longitude": double.parse(longitude.toString()),
-            "chargeHour": chargePerHourController.text,
-            "selectedSubject": selectedSubject,
-            "image": imageFile,
-          });
-          if(user !=null && !user!.emailVerified) {
-            user!.sendEmailVerification();
-            Fluttertoast.showToast(msg: "Check your email for verification");
-          }
+  void registerUser() async {
+    try {
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      )
+          .then((signedInUser) {
+        FirebaseFirestore.instance
+            .collection("tutor&tutte")
+            .doc(signedInUser.user!.uid)
+            .set({
+          // "uid": user?.uid,
+          "firstName": firstNameController.text,
+          "lastName": lastNameController.text,
+          "mobileNo": mobileController.text,
+          "email": emailController.text,
+          "password": passwordController.text,
+          "latitude": double.parse(latitude.toString()),
+          "longitude": double.parse(longitude.toString()),
+          "chargeHour": chargePerHourController.text,
+          "selectedSubject": selectedSubject != null ? selectedSubject : "",
+          "image": imageSnap,
+        });
+        if (user != null && !user!.emailVerified) {
+          user!.sendEmailVerification();
+          Fluttertoast.showToast(msg: "Check your email for verification");
+        }
       });
-    } on FirebaseException catch(e){
+    } on FirebaseException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
-        Fluttertoast.showToast(msg: "The account already exists for that email.");
+        Fluttertoast.showToast(
+            msg: "The account already exists for that email.");
       }
-    } catch(e){
+    } catch (e) {
       print(e.toString());
     }
-    Navigator.push(context, MaterialPageRoute(builder: (ctx) => const LoginScreen()));
+    Navigator.push(
+        context, MaterialPageRoute(builder: (ctx) => const LoginScreen()));
   }
-
 
   @override
   void initState() {
     // TODO Store Latitude & Longitude in Variable from SharedPreference
-     latitude = SharedPreferenceClass.preferences?.getDouble("latitude").toString();
-    longitude = SharedPreferenceClass.preferences?.getDouble("longitude").toString();
+    latitude =
+        SharedPreferenceClass.preferences?.getDouble("latitude").toString();
+    longitude =
+        SharedPreferenceClass.preferences?.getDouble("longitude").toString();
     print("My Latitude  $latitude");
     print("My longitude $longitude");
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -482,8 +521,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 15.0,
             ),
             InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const GoogleMapScreen()));
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const GoogleMapScreen()));
               },
               child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -512,9 +554,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ],
                   )),
             ),
-            const SizedBox(height: 6.0,),
+            const SizedBox(
+              height: 6.0,
+            ),
             InkWell(
-              onTap: uploadImage,
+              onTap: (){
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context){
+                      return  Dialog(
+                        insetPadding: const EdgeInsets.only(top: 100, bottom: 500, left: 20, right: 20),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: const Text("Pick Image from Gallery"),
+                              trailing: const Icon(Icons.browse_gallery),
+                              onTap: (){
+                                pickImage(ImageSource.gallery);
+                                Navigator.pop(context);
+                              },
+                            ),
+                            ListTile(
+                              title: const Text("Pick Image from Camera"),
+                              trailing: const Icon(Icons.camera),
+                              onTap: (){
+                                pickImage(ImageSource.camera);
+                                Navigator.pop(context);
+                              },
+                            )
+                          ],
+                        ),
+                      );
+                    }
+                );
+              },
               child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
@@ -554,10 +627,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ? MaterialButton(
                             onPressed: () {
                               textFieldValidation();
-                                setState(() {
-                                  isLoading = true;
-                                });
-
+                              setState(() {
+                                isLoading = true;
+                              });
                             },
                             child: const Text(
                               "R E G I S T E R",

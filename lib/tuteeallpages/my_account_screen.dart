@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_portfolio/widgets/mywidets.dart';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -14,14 +15,16 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
 
 
   String dummyImage = "https://png.pngtree.com/element_our/png/20181206/users-vector-icon-png_260862.jpg";
+  final myUid = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   Widget build(BuildContext context) {
+    print("Current UID is $myUid");
     return Scaffold(
       backgroundColor: backgroundColor,
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('tutor&tutte').snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+        stream: FirebaseFirestore.instance.collection('tutor&tutte').where("uid", isEqualTo: myUid).snapshots(),
+        builder: (BuildContext context, AsyncSnapshot snapshot){
           if(!snapshot.hasData){
             return  Center(
                 child: JumpingText('Loading...', style: const TextStyle(color: Colors.white, fontSize: 24),));
@@ -54,7 +57,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                       )
                   ),
                   Container(
-                      margin: const EdgeInsets.only(top: 25, left: 35),
+                      margin: const EdgeInsets.only(top: 25),
                       child: Column(
                         children: [
                           Row(

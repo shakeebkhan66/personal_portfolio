@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
               padding: const EdgeInsets.only(top: 15),
               child: Image.asset(
                 "assets/images/ttt.png",
-                height: 290,
+                height: 250,
               ),
             ),
             Container(
@@ -185,26 +185,25 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: buttonColor,
                   ),
                   child:
-                  // loginLoading == false
-                  //     ?
-                  MaterialButton(
-                          onPressed: () {
-                            textFieldValidation();
-                          },
-                          child: const Text(
-                            "L O G I N",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w900),
-                          ),
-                        )
+                      // loginLoading == false
+                      //     ?
+                      MaterialButton(
+                    onPressed: () {
+                      textFieldValidation();
+                    },
+                    child: const Text(
+                      "L O G I N",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w900),
+                    ),
+                  )
 
-                      // : const Center(
-                      //     child: CircularProgressIndicator(
-                      //       color: Colors.white,
-                      //     ),
-                      //   )
-      ),
+                  // : const Center(
+                  //     child: CircularProgressIndicator(
+                  //       color: Colors.white,
+                  //     ),
+                  //   )
+                  ),
             ),
             const SizedBox(
               height: 5.0,

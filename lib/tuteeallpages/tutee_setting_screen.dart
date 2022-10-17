@@ -3,7 +3,10 @@ import 'package:page_transition/page_transition.dart';
 import 'package:personal_portfolio/authentications/login_screen.dart';
 import 'package:personal_portfolio/tuteeallpages/my_account_screen.dart';
 import 'package:personal_portfolio/tuteeallpages/password_reset_screen.dart';
+import 'package:provider/provider.dart';
 
+import '../SharedPref/shared_preference_class.dart';
+import '../providers/authentication_provider_class.dart';
 import '../widgets/mywidets.dart';
 
 class TuteeSettingScreen extends StatefulWidget {
@@ -16,6 +19,7 @@ class TuteeSettingScreen extends StatefulWidget {
 class _TuteeSettingScreenState extends State<TuteeSettingScreen> {
   @override
   Widget build(BuildContext context) {
+    final myProvider = Provider.of<SignInAuthenticationProvider>(context);
     return WillPopScope(
       onWillPop: () async{
         return false;
@@ -96,15 +100,8 @@ class _TuteeSettingScreenState extends State<TuteeSettingScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.bottomToTop,
-                            duration: const Duration(milliseconds: 500),
-                            child: const LoginScreen(),
-                            inheritTheme: true,
-                            ctx: context,
-                          ));
+                      myProvider.signOut(context);
+                      SharedPreferenceClass.preferences!.setBool("loggedIn", false);
                     },
                     child: Container(
                       height: 55,
