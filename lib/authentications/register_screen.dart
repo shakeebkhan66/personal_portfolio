@@ -32,6 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool imageLoading = false;
   FirebaseAuth auth = FirebaseAuth.instance;
   final user = FirebaseAuth.instance.currentUser;
+  final currentUser = FirebaseAuth.instance;
 
   // TODO Text Editing Controllers
   TextEditingController firstNameController = TextEditingController();
@@ -158,7 +159,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             .collection("tutor&tutte")
             .doc(signedInUser.user!.uid)
             .set({
-          // "uid": user?.uid,
+          "uid": currentUser.currentUser!.uid,
           "firstName": firstNameController.text,
           "lastName": lastNameController.text,
           "mobileNo": mobileController.text,
